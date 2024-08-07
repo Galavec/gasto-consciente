@@ -1,0 +1,79 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Ignora archivos o directorios de compilación:
+/dist
+/tmp
+/out-tsc
+/bazel-out
+
+# Ignora archivos o directorios de "Sonar - Scanner"
+/.scannerwork
+
+# Ignora archivos o directorios de "Node"
+/node_modules
+
+# Ignora archivos de registro de errores
+/npm-debug.log
+/yarn-error.log
+
+# Ignora directorios y archivos específicos de IDE
+/.idea/
+/.settings/
+/.project
+/.classpath
+/*.launch
+/.c9/
+/*.sublime-workspace
+out/.apt_generated
+.factorypath
+.springBeans
+.sts4-cache
+bin/
+/nbproject/private/
+/nbbuild/
+/nbdist/
+/.nb-gradle/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+# Ignora directorios y archivos específicos de Visual Studio Code
+/.vscode/*
+!/.vscode/settings.json
+!/.vscode/tasks.json
+!/.vscode/launch.json
+!/.vscode/extensions.json
+
+# Ignora directorios de historial
+/.history/*
+
+# Ignora directorios y archivos de caché
+/.angular/cache
+/.sass-cache/
+
+# Ignora archivos específicos
+/connect.lock
+/coverage
+/typings
+/.DS_Store
+/Thumbs.db
+
+# Ignora archivos compilados y generados
+*.class
+*.jar
+*.war
+*.ear
+
+# Ignora directorios y archivos de construcción
+target/
+lib/
+
+# Ignora archivos de configuración local
+application.properties
+application.yml
+
+# Ignora archivos de registro específicos
+/libpeerconnection.log
+/testem.log
+*.log
