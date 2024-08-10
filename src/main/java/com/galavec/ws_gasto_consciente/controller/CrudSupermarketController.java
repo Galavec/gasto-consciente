@@ -1,8 +1,9 @@
 package com.galavec.ws_gasto_consciente.controller;
 
-import com.galavec.ws_gasto_consciente.dto.BranchDto;
+import com.galavec.ws_gasto_consciente.dto.SupermarketDto;
 import com.galavec.ws_gasto_consciente.entity.SupermarketEntity;
 import com.galavec.ws_gasto_consciente.service.SupermarketService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,7 @@ public class CrudSupermarketController {
     }
 
     @PostMapping("/new-supermarket")
-    public ResponseEntity<String> newSupermarket(@RequestBody BranchDto supermarketEntity) {
+    public ResponseEntity<String> newSupermarket(@RequestBody @Valid SupermarketDto supermarketDto) {
         log.info("****** Proceso newSupermarket ******");
 
         return new ResponseEntity<>("Successfully", HttpStatus.CREATED);

@@ -69,10 +69,6 @@ bin/
 target/
 lib/
 
-# Ignora archivos de configuración local
-application.properties
-application.yml
-
 # Ignora archivos de registro específicos
 /libpeerconnection.log
 /testem.log
