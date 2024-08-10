@@ -1,5 +1,6 @@
 package com.galavec.ws_gasto_consciente.exception;
 
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.galavec.ws_gasto_consciente.dto.ErrorResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -23,6 +24,15 @@ public class GlobalExceptionHandler {
         log.error("Error en handleValidationExceptions: {}", errors);
 
         ErrorResponseDto errorResponseDto = new ErrorResponseDto("-1", "Tamaño o formato incorrecto de los valores que se envían en el request.", errors, "Revisar el valor del campo que se indica en \"details\".");
+
+        return new ResponseEntity<>(errorResponseDto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UnrecognizedPropertyException.class)
+    public ResponseEntity<ErrorResponseDto> handleUnknownPropertyExceptions(UnrecognizedPropertyException ex) {
+        log.error("Error en handleUnknownPropertyExceptions: {}", ex.getMessage());
+
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto("-2", "Uno o varios campos del request tienen nombres incorrectos.", ex.getPropertyName(), "Revisar el nombre del campo que se indica en \"details\".");
 
         return new ResponseEntity<>(errorResponseDto, HttpStatus.BAD_REQUEST);
     }
