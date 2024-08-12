@@ -36,4 +36,13 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(errorResponseDto, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(InvalidDateFormatException.class)
+    public ResponseEntity<ErrorResponseDto> handleInvalidLocalDateFormatException(InvalidDateFormatException ex) {
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto("-3", "Error en el formato de fecha.", ex.getMessage(), "Por favor enviar la fecha en el formato correcto.");
+
+        log.error("Error en handleInvalidLocalDateFormatException: {}", ex.getMessage());
+
+        return new ResponseEntity<>(errorResponseDto, HttpStatus.BAD_REQUEST);
+    }
 }

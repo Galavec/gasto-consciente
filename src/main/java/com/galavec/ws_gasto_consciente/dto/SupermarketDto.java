@@ -1,6 +1,7 @@
 package com.galavec.ws_gasto_consciente.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.galavec.ws_gasto_consciente.util.CustomLocalDateTimeDeserializer;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -27,7 +28,7 @@ public class SupermarketDto {
     private String userCreation;
 
     @NotNull(message = "La fecha de creación no puede ser nulo.")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @JsonDeserialize(using = CustomLocalDateTimeDeserializer.class)
     private LocalDateTime dateCreation;
 
     @NotNull(message = "El estado del registro no puede ser nulo.")
