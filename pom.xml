@@ -13,8 +13,21 @@
 
     <groupId>com.galavec.ws_gasto_consciente</groupId>
     <artifactId>ws-gasto-consciente</artifactId>
+    <description>API REST para llevar un control sobre los gastos domésticos realizados en supermercados.</description>
     <packaging>war</packaging>
     <version>1.0.0-SNAPSHOT</version>
+
+    <developers>
+        <developer>
+            <id>galavec</id>
+            <name>Héctor Alberto Galarza V.</name>
+            <email>galavec@hotmail.com</email>
+            <roles>
+                <role>Administrador</role>
+                <role>Desarrollador</role>
+            </roles>
+        </developer>
+    </developers>
 
     <properties>
         <java.version>17</java.version>
