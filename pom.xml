@@ -107,7 +107,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
-            <version>2.17.2</version> <!-- Asegúrate de usar la versión adecuada -->
+            <version>2.17.2</version>
         </dependency>
     </dependencies>
 
@@ -132,6 +132,23 @@
                     <hostname>${deploy.wildfly.host}</hostname>
                     <port>${deploy.wildfly.port}</port>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <show>protected</show>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>javadoc</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

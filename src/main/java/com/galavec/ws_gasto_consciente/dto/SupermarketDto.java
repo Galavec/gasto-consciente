@@ -11,6 +11,13 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+/**
+ * Clase utilizada para transferir datos relacionados con los supermercados.
+ *
+ * @author Héctor Galavec
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 @Getter
 @Setter
 @AllArgsConstructor

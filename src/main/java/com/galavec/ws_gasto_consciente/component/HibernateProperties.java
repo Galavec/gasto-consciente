@@ -7,6 +7,13 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Clase que contiene los valores de las propiedades para Hibernate.
+ *
+ * @author Héctor Galavec
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 @Getter
 @Component
 public class HibernateProperties {
@@ -28,6 +35,13 @@ public class HibernateProperties {
     @Value("${hibernate.show_sql}")
     private String showSql;
 
+    /**
+     * Convierte los ajustes de configuración actuales en un mapa de propiedades de Hibernación.
+     *
+     * @return los nombres de las propiedades de Hibernate como claves y sus valores correspondientes.
+     * @author Héctor Galavec
+     * @since 1.0.0
+     */
     public Map<String, Object> toMap() {
         Map<String, Object> properties = new HashMap<>();
         properties.put("hibernate.jdbc.lob.non_contextual_creation", lobNonContextualCreation);
@@ -36,6 +50,7 @@ public class HibernateProperties {
         properties.put("hibernate.format_sql", formatSql);
         properties.put("hibernate.ddl-auto", ddlAuto);
         properties.put("hibernate.show_sql", showSql);
+
         return properties;
     }
 }

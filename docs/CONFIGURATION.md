@@ -4,6 +4,7 @@
 - [wildfly-maven-plugin](#wildfly-maven-plugin).
 - [JacksonConfig](#jacksonconfig).
 - [GastoConscienteData](#gastoconscientedata).
+- [maven-javadoc-plugin](#maven-javadoc-plugin).
 
 ## maven-compiler
 
@@ -68,3 +69,28 @@ public class JacksonConfig {
 - **Ubicación**: Clase ubicada en: `src/main/java/com/galavec/ws_gasto_consciente/sources/GastoConscienteData.java`
 - **Descripción**: Configuración utilizada para conexión hacia la base de datos PostgreSql "gasto-consciente".
 - **Configuración Importante**: Conexión hacia base de datos "gasto-consciente".
+
+## maven-javadoc-plugin
+
+- **Ubicación**: En el archivo `pom.xml`
+- **Descripción**: Plugin para la documentación con JavaDoc.
+- **Configuración Importante**: Se especifica la versión de Java a utilizar y el método de ejecución.
+
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-javadoc-plugin</artifactId>
+    <version>3.8.0</version>
+    <configuration>
+        <source>${java.version}</source>
+        <show>protected</show>
+    </configuration>
+    <executions>
+        <execution>
+            <goals>
+                <goal>javadoc</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+```
