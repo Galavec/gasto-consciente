@@ -43,7 +43,17 @@ public enum ErrorTypeEnum {
      *
      * @since 1.0.0
      */
-    INVALID_DATE_FORMAT("-3", "Error en el formato de fecha.", "Por favor enviar la fecha en el formato correcto.");
+    INVALID_DATE_FORMAT("-3", "Error en el formato de fecha.", "Por favor enviar la fecha en el formato correcto."),
+
+    /**
+     * Tipo de error que indica que hubo un error al insertar datos en la base de datos.
+     * <p>Code: -4</p>
+     * <p>Message: Error al insertar registro en la base de datos.</p>
+     * <p>Recommendation: Revisar los datos que se están enviando a registrar.</p>
+     *
+     * @since 1.0.0
+     */
+    DATA_INSERTION_FAILURE("-4", "Error al insertar registro en la base de datos.", "Revisar los datos que se están enviando a registrar.");
 
     private final String code;
     private final String message;

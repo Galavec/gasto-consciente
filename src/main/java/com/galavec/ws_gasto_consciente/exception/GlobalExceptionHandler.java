@@ -1,7 +1,7 @@
 package com.galavec.ws_gasto_consciente.exception;
 
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
-import com.galavec.ws_gasto_consciente.dto.ErrorResponseDto;
+import com.galavec.ws_gasto_consciente.dto.ResponseDto;
 import com.galavec.ws_gasto_consciente.enums.ErrorTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -31,21 +31,21 @@ public class GlobalExceptionHandler {
      * una respuesta de error con un código de error y detalles específicos.</p>
      *
      * @param ex la excepción {@code MethodArgumentNotValidException} que contiene los detalles de los errores de validación.
-     * @return una respuesta HTTP con un objeto {@code ErrorResponseDto} y el estado {@code BAD_REQUEST}.
+     * @return una respuesta HTTP con un objeto {@code ResponseDto} y el estado {@code BAD_REQUEST}.
      * @author Héctor Galavec
      * @since 1.0.0
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponseDto> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public ResponseEntity<ResponseDto> handleValidationExceptions(MethodArgumentNotValidException ex) {
         String errors = ex.getBindingResult().getAllErrors().stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.joining(", "));
 
         log.error("Error en handleValidationExceptions: {}", errors);
 
-        ErrorResponseDto errorResponseDto = new ErrorResponseDto(ErrorTypeEnum.INCORRECT_SIZE, errors);
+        ResponseDto responseDto = new ResponseDto(ErrorTypeEnum.INCORRECT_SIZE, errors);
 
-        return new ResponseEntity<>(errorResponseDto, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
     }
 
     /**
@@ -55,17 +55,17 @@ public class GlobalExceptionHandler {
      * una respuesta de error con un código de error y detalles específicos.</p>
      *
      * @param ex la excepción {@code UnrecognizedPropertyException} que contiene los detalles del error.
-     * @return una respuesta HTTP con un objeto {@code ErrorResponseDto} y el estado {@code BAD_REQUEST}.
+     * @return una respuesta HTTP con un objeto {@code ResponseDto} y el estado {@code BAD_REQUEST}.
      * @author Héctor Galavec
      * @since 1.0.0
      */
     @ExceptionHandler(UnrecognizedPropertyException.class)
-    public ResponseEntity<ErrorResponseDto> handleUnknownPropertyExceptions(UnrecognizedPropertyException ex) {
+    public ResponseEntity<ResponseDto> handleUnknownPropertyExceptions(UnrecognizedPropertyException ex) {
         log.error("Error en handleUnknownPropertyExceptions: {}", ex.getMessage());
 
-        ErrorResponseDto errorResponseDto = new ErrorResponseDto(ErrorTypeEnum.UNKNOWN_PROPERTY, ex.getPropertyName());
+        ResponseDto responseDto = new ResponseDto(ErrorTypeEnum.UNKNOWN_PROPERTY, ex.getPropertyName());
 
-        return new ResponseEntity<>(errorResponseDto, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
     }
 
     /**
@@ -75,16 +75,16 @@ public class GlobalExceptionHandler {
      * código de error y detalles específicos.</p>
      *
      * @param ex la excepción {@code InvalidDateFormatException} que contiene los detalles del error.
-     * @return una respuesta HTTP con un objeto {@code ErrorResponseDto} y el estado {@code BAD_REQUEST}.
+     * @return una respuesta HTTP con un objeto {@code ResponseDto} y el estado {@code BAD_REQUEST}.
      * @author Héctor Galavec
      * @since 1.0.0
      */
     @ExceptionHandler(InvalidDateFormatException.class)
-    public ResponseEntity<ErrorResponseDto> handleInvalidLocalDateFormatException(InvalidDateFormatException ex) {
-        ErrorResponseDto errorResponseDto = new ErrorResponseDto(ErrorTypeEnum.INVALID_DATE_FORMAT, ex.getMessage());
+    public ResponseEntity<ResponseDto> handleInvalidLocalDateFormatException(InvalidDateFormatException ex) {
+        ResponseDto responseDto = new ResponseDto(ErrorTypeEnum.INVALID_DATE_FORMAT, ex.getMessage());
 
         log.error("Error en handleInvalidLocalDateFormatException: {}", ex.getMessage());
 
-        return new ResponseEntity<>(errorResponseDto, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
     }
 }
