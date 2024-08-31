@@ -63,7 +63,7 @@ public class GastoConscienteData {
 
         Map<String, Object> properties = hibernateProperties.toMap();
 
-        properties.put("hibernate.dialect", env.getProperty("postgre.hibernate.dialect"));
+        properties.put("spring.jpa.properties.hibernate.dialect", env.getProperty("postgre.hibernate.dialect"));
 
         BaseData.entityProperties(localContainerEntityManagerFactoryBean, properties);
 
