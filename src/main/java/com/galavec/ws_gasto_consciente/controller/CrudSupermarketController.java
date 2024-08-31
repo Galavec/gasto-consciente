@@ -1,7 +1,10 @@
 package com.galavec.ws_gasto_consciente.controller;
 
+import com.galavec.ws_gasto_consciente.dto.ResponseDto;
 import com.galavec.ws_gasto_consciente.dto.SupermarketDto;
 import com.galavec.ws_gasto_consciente.entity.SupermarketEntity;
+import com.galavec.ws_gasto_consciente.enums.ErrorTypeEnum;
+import com.galavec.ws_gasto_consciente.enums.SuccessTypeEnum;
 import com.galavec.ws_gasto_consciente.service.SupermarketService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -51,15 +54,31 @@ public class CrudSupermarketController {
      * registra el inicio del proceso y devuelve una respuesta HTTP con un mensaje de éxito y el estado {@code CREATED}.</p>
      *
      * @param supermarketDto el objeto {@code SupermarketDto} que contiene los datos del nuevo supermercado.
-     * @return una respuesta HTTP con un mensaje de éxito y el estado {@code CREATED}.
+     * @return una respuesta HTTP con un mensaje sobre el resultado de la solicitud y el estado {@code CREATED}.
      * @author Héctor Galavec
      * @since 1.0.0
      */
     @PostMapping("/new-supermarket")
-    public ResponseEntity<String> newSupermarket(@RequestBody @Valid SupermarketDto supermarketDto) {
-        log.info("****** Proceso newSupermarket ******");
+    public ResponseEntity<ResponseDto> newSupermarket(@RequestBody @Valid SupermarketDto supermarketDto) {
+        log.info("****** Proceso newSupermarket: {} ******", supermarketDto.getSupermarketName());
 
-        return new ResponseEntity<>("Successfully", HttpStatus.CREATED);
+        ResponseDto responseDto;
+
+        String registrationCode;
+
+        try {
+            registrationCode = String.valueOf(supermarketService.createSupermarket(supermarketDto).getCodSupermarket());
+
+            responseDto = new ResponseDto(SuccessTypeEnum.DATA_INSERTION_SUCCESS, registrationCode);
+
+            return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
+        } catch (Exception ex) {
+            log.error("Error en newSupermarket: ", ex);
+
+            responseDto = new ResponseDto(ErrorTypeEnum.DATA_INSERTION_FAILURE, ex.getMessage());
+
+            return new ResponseEntity<>(responseDto, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**

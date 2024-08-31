@@ -44,8 +44,9 @@ public class ResponseDto {
      * @see SuccessTypeEnum
      * @since 1.0.0
      */
-    public ResponseDto(SuccessTypeEnum successTypeEnum) {
+    public ResponseDto(SuccessTypeEnum successTypeEnum, String details) {
         this.codResponse = successTypeEnum.getCode();
         this.message = successTypeEnum.getMessage();
+        this.details = details;
     }
 }
