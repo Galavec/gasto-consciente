@@ -6,6 +6,12 @@ import com.galavec.ws_gasto_consciente.entity.SupermarketEntity;
 import com.galavec.ws_gasto_consciente.enums.ErrorTypeEnum;
 import com.galavec.ws_gasto_consciente.enums.SuccessTypeEnum;
 import com.galavec.ws_gasto_consciente.service.SupermarketService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +38,7 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "http://localhost:8080", methods = {RequestMethod.GET, RequestMethod.POST})
 @RequestMapping(value = "/crud-supermarket")
+@Tag(name = "Supermercado", description = "Operaciones relacionadas con supermercados")
 public class CrudSupermarketController {
     private final SupermarketService supermarketService;
 
@@ -58,6 +65,28 @@ public class CrudSupermarketController {
      * @author Héctor Galavec
      * @since 1.0.0
      */
+    @Operation(
+            summary = "Crear un nuevo supermercado",
+            description = "Maneja las solicitudes POST para crear un nuevo supermercado."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Supermercado creado exitosamente", content = @Content(
+                    schema = @Schema(implementation = ResponseDto.class)
+            )),
+            @ApiResponse(responseCode = "-4", description = "Error al insertar registro en la base de datos", content = @Content(
+                    schema = @Schema(implementation = ResponseDto.class)
+            )),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content(
+                    schema = @Schema(implementation = ResponseDto.class)
+            ))
+    })
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            description = "Datos del supermercado a crear",
+            required = true,
+            content = @Content(
+                    schema = @Schema(implementation = SupermarketDto.class)
+            )
+    )
     @PostMapping("/new-supermarket")
     public ResponseEntity<ResponseDto> newSupermarket(@RequestBody @Valid SupermarketDto supermarketDto) {
         log.info("****** Proceso newSupermarket: {} ******", supermarketDto.getSupermarketName());
@@ -88,6 +117,13 @@ public class CrudSupermarketController {
      * @author Héctor Galavec
      * @since 1.0.0
      */
+    @Operation(
+            summary = "Obtiene el listado de todos los supermercados registrados",
+            description = "Maneja las solicitudes GET para obtener el listado de todos los supermercados registrados."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Consulta realizada exitosamente")
+    })
     @GetMapping("/get-all-supermarkets")
     public ResponseEntity<List<SupermarketEntity>> getAllSupermarkets() {
         log.info("****** Proceso getAllSupermarkets ******");

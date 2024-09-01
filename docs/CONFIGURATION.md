@@ -2,9 +2,10 @@
 
 - [maven-compiler](#maven-compiler).
 - [wildfly-maven-plugin](#wildfly-maven-plugin).
+- [maven-javadoc-plugin](#maven-javadoc-plugin).
 - [JacksonConfig](#jacksonconfig).
 - [GastoConscienteData](#gastoconscientedata).
-- [maven-javadoc-plugin](#maven-javadoc-plugin).
+- [OpenApiConfig](#openapiconfig).
 
 ## maven-compiler
 
@@ -47,29 +48,6 @@
 </plugin>
 ```
 
-## JacksonConfig
-
-- **Ubicación**: Clase ubicada en: `src/main/java/com/galavec/ws_gasto_consciente/configuration/JacksonConfig.java`
-- **Descripción**: Configuración utilizada para validar el nombre de cada objeto en el request.
-- **Configuración Importante**: Validación de los campos en un request.
-
-```java
-public class JacksonConfig {
-    @Bean
-    public ObjectMapper objectMapper() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-        return objectMapper;
-    }
-}
-```
-
-## GastoConscienteData
-
-- **Ubicación**: Clase ubicada en: `src/main/java/com/galavec/ws_gasto_consciente/sources/GastoConscienteData.java`
-- **Descripción**: Configuración utilizada para conexión hacia la base de datos PostgreSql "gasto-consciente".
-- **Configuración Importante**: Conexión hacia base de datos "gasto-consciente".
-
 ## maven-javadoc-plugin
 
 - **Ubicación**: En el archivo `pom.xml`
@@ -94,3 +72,32 @@ public class JacksonConfig {
     </executions>
 </plugin>
 ```
+
+## JacksonConfig
+
+- **Ubicación**: Clase ubicada en: `src/main/java/com/galavec/ws_gasto_consciente/configuration/JacksonConfig.java`
+- **Descripción**: Configuración utilizada para validar el nombre de cada objeto en el request.
+- **Configuración Importante**: Validación de los campos en un request.
+
+```java
+public class JacksonConfig {
+    @Bean
+    public ObjectMapper objectMapper() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        return objectMapper;
+    }
+}
+```
+
+## GastoConscienteData
+
+- **Ubicación**: Clase ubicada en: `src/main/java/com/galavec/ws_gasto_consciente/sources/GastoConscienteData.java`
+- **Descripción**: Configuración utilizada para conexión hacia la base de datos PostgreSql "gasto-consciente".
+- **Configuración Importante**: Conexión hacia base de datos "gasto-consciente".
+
+## OpenApiConfig
+
+- **Ubicación**: Clase ubicada en: `src/main/java/com/galavec/ws_gasto_consciente/configuration/OpenApiConfig.java`
+- **Descripción**: Esta clase configura la documentación de la API REST utilizando Swagger y OpenAPI.
+- **Configuración Importante**: Implementación de Swagger.

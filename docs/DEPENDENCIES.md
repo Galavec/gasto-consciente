@@ -10,6 +10,7 @@
 - [postgresql](#postgresql).
 - [spring-boot-starter-validation](#spring-boot-starter-validation).
 - [jackson-datatype-jsr310](#jackson-datatype-jsr310).
+- [springdoc-openapi-starter-webmvc-ui](#springdoc-openapi-starter-webmvc-ui).
 
 ## spring-boot-starter-web
 
@@ -89,4 +90,12 @@
 - **Artefacto**: jackson-datatype-jsr310
 - **Versión**: 2.17.2
 - **Propósito**: Para agregar soporte a Jackson como el manejo de las clases de fecha y hora de Java 8 (como LocalDate, LocalDateTime, ZonedDateTime, etc.). Esta extensión permite que Jackson serialice y deserialice correctamente estos tipos de datos, que no son compatibles de forma nativa con Jackson. Esta dependencia es para el uso de la anotación `@JsonDeserialize` en las clases de obtención de datos como los DTO.
+- **Configuración Especial**: No requiere configuración especial.
+
+## springdoc-openapi-starter-webmvc-ui
+
+- **Grupo**: org.springdoc
+- **Artefacto**: springdoc-openapi-starter-webmvc-ui
+- **Versión**: 2.6.0
+- **Propósito**: En Maven se utiliza para integrar y automatizar la generación de documentación de APIs RESTful en aplicaciones Spring Boot, utilizando la especificación OpenAPI.
 - **Configuración Especial**: No requiere configuración especial.

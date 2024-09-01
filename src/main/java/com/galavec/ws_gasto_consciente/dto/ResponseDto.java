@@ -2,6 +2,7 @@ package com.galavec.ws_gasto_consciente.dto;
 
 import com.galavec.ws_gasto_consciente.enums.ErrorTypeEnum;
 import com.galavec.ws_gasto_consciente.enums.SuccessTypeEnum;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,10 +15,18 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@Schema(description = "Respuesta de la API que incluye código de respuesta, mensaje, detalles y recomendación")
 public class ResponseDto {
+    @Schema(description = "Código de respuesta", example = "200")
     private String codResponse;
+
+    @Schema(description = "Mensaje de la respuesta", example = "Operación exitosa")
     private String message;
+
+    @Schema(description = "Detalles adicionales", example = "ID del nuevo supermercado: 123")
     private String details;
+
+    @Schema(description = "Recomendación o sugerencia", example = "Verificar los datos ingresados")
     private String recommendation;
 
     /**
