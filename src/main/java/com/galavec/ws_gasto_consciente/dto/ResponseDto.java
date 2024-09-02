@@ -1,7 +1,5 @@
 package com.galavec.ws_gasto_consciente.dto;
 
-import com.galavec.ws_gasto_consciente.enums.ErrorTypeEnum;
-import com.galavec.ws_gasto_consciente.enums.SuccessTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,30 +30,29 @@ public class ResponseDto {
     /**
      * Construye un nuevo ResponseDto con el tipo de error y los detalles especificados.
      *
-     * @param errorTypeEnum el tipo de error, que proporciona el código de error, el mensaje y la recomendación.
-     * @param details       detalles adicionales sobre el error.
+     * @param errorResponseDto contiene el código de error, mensaje, detalles adicionales y la recomendación.
      * @author Héctor Galavec
-     * @see ErrorTypeEnum
+     * @see ErrorResponseDto
      * @since 1.0.0
      */
-    public ResponseDto(ErrorTypeEnum errorTypeEnum, String details) {
-        this.codResponse = errorTypeEnum.getCode();
-        this.message = errorTypeEnum.getMessage();
-        this.details = details;
-        this.recommendation = errorTypeEnum.getRecommendation();
+    public ResponseDto(ErrorResponseDto errorResponseDto) {
+        this.codResponse = errorResponseDto.getCodResponse();
+        this.message = errorResponseDto.getMessage();
+        this.details = errorResponseDto.getDetails();
+        this.recommendation = errorResponseDto.getRecommendation();
     }
 
     /**
      * Construye un nuevo ResponseDto con el tipo de respuesta exitosa.
      *
-     * @param successTypeEnum el tipo de respuesta exitosa, que proporciona el código de respuesta exitosa y el mensaje.
+     * @param successResponseDto contiene el código de respuesta exitosa, mensaje y la recomendación.
      * @author Héctor Galavec
-     * @see SuccessTypeEnum
+     * @see SuccessResponseDto
      * @since 1.0.0
      */
-    public ResponseDto(SuccessTypeEnum successTypeEnum, String details) {
-        this.codResponse = successTypeEnum.getCode();
-        this.message = successTypeEnum.getMessage();
-        this.details = details;
+    public ResponseDto(SuccessResponseDto successResponseDto) {
+        this.codResponse = successResponseDto.getCodResponse();
+        this.message = successResponseDto.getMessage();
+        this.details = successResponseDto.getDetails();
     }
 }

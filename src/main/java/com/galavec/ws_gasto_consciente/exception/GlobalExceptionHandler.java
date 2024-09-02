@@ -1,6 +1,7 @@
 package com.galavec.ws_gasto_consciente.exception;
 
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
+import com.galavec.ws_gasto_consciente.dto.ErrorResponseDto;
 import com.galavec.ws_gasto_consciente.dto.ResponseDto;
 import com.galavec.ws_gasto_consciente.enums.ErrorTypeEnum;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +44,9 @@ public class GlobalExceptionHandler {
 
         log.error("Error en handleValidationExceptions: {}", errors);
 
-        ResponseDto responseDto = new ResponseDto(ErrorTypeEnum.INCORRECT_SIZE, errors);
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto(ErrorTypeEnum.INCORRECT_SIZE, errors);
+
+        ResponseDto responseDto = new ResponseDto(errorResponseDto);
 
         return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
     }
@@ -63,7 +66,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ResponseDto> handleUnknownPropertyExceptions(UnrecognizedPropertyException ex) {
         log.error("Error en handleUnknownPropertyExceptions: {}", ex.getMessage());
 
-        ResponseDto responseDto = new ResponseDto(ErrorTypeEnum.UNKNOWN_PROPERTY, ex.getPropertyName());
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto(ErrorTypeEnum.UNKNOWN_PROPERTY, ex.getPropertyName());
+
+        ResponseDto responseDto = new ResponseDto(errorResponseDto);
 
         return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
     }
@@ -81,7 +86,10 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(InvalidDateFormatException.class)
     public ResponseEntity<ResponseDto> handleInvalidLocalDateFormatException(InvalidDateFormatException ex) {
-        ResponseDto responseDto = new ResponseDto(ErrorTypeEnum.INVALID_DATE_FORMAT, ex.getMessage());
+
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto(ErrorTypeEnum.INVALID_DATE_FORMAT, ex.getMessage());
+
+        ResponseDto responseDto = new ResponseDto(errorResponseDto);
 
         log.error("Error en handleInvalidLocalDateFormatException: {}", ex.getMessage());
 

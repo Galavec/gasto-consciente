@@ -1,6 +1,8 @@
 package com.galavec.ws_gasto_consciente.controller;
 
+import com.galavec.ws_gasto_consciente.dto.ErrorResponseDto;
 import com.galavec.ws_gasto_consciente.dto.ResponseDto;
+import com.galavec.ws_gasto_consciente.dto.SuccessResponseDto;
 import com.galavec.ws_gasto_consciente.dto.SupermarketDto;
 import com.galavec.ws_gasto_consciente.entity.SupermarketEntity;
 import com.galavec.ws_gasto_consciente.enums.ErrorTypeEnum;
@@ -71,13 +73,13 @@ public class CrudSupermarketController {
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Supermercado creado exitosamente", content = @Content(
-                    schema = @Schema(implementation = ResponseDto.class)
+                    schema = @Schema(implementation = SuccessResponseDto.class)
             )),
             @ApiResponse(responseCode = "-4", description = "Error al insertar registro en la base de datos", content = @Content(
-                    schema = @Schema(implementation = ResponseDto.class)
+                    schema = @Schema(implementation = ErrorResponseDto.class)
             )),
             @ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content(
-                    schema = @Schema(implementation = ResponseDto.class)
+                    schema = @Schema(implementation = ErrorResponseDto.class)
             ))
     })
     @io.swagger.v3.oas.annotations.parameters.RequestBody(
@@ -98,13 +100,17 @@ public class CrudSupermarketController {
         try {
             registrationCode = String.valueOf(supermarketService.createSupermarket(supermarketDto).getCodSupermarket());
 
-            responseDto = new ResponseDto(SuccessTypeEnum.DATA_INSERTION_SUCCESS, registrationCode);
+            SuccessResponseDto successResponse = new SuccessResponseDto(SuccessTypeEnum.DATA_INSERTION_SUCCESS, registrationCode);
+
+            responseDto = new ResponseDto(successResponse);
 
             return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
         } catch (Exception ex) {
             log.error("Error en newSupermarket: ", ex);
 
-            responseDto = new ResponseDto(ErrorTypeEnum.DATA_INSERTION_FAILURE, ex.getMessage());
+            ErrorResponseDto errorResponseDto = new ErrorResponseDto(ErrorTypeEnum.DATA_INSERTION_FAILURE, ex.getMessage());
+
+            responseDto = new ResponseDto(errorResponseDto);
 
             return new ResponseEntity<>(responseDto, HttpStatus.INTERNAL_SERVER_ERROR);
         }
