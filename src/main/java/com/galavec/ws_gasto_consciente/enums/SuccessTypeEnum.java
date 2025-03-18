@@ -22,7 +22,16 @@ public enum SuccessTypeEnum {
      *
      * @since 1.0.0
      */
-    DATA_INSERTION_SUCCESS("4", "Se insertó exitosamente el registro en la base de datos.");
+    DATA_INSERTION_SUCCESS("4", "Se insertó exitosamente el registro en la base de datos."),
+
+    /**
+     * Tipo de respuesta exitosa que indica que se realizó satisfactoriamente el proceso.
+     * <p>Code: 200</p>
+     * <p>Message: Ejecución exitosa.</p>
+     *
+     * @since 1.0.0
+     */
+    SUCCESSFUL_EXECUTION("200", "Ejecución exitosa.");
 
     private final String code;
     private final String message;

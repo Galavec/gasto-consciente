@@ -53,7 +53,27 @@ public enum ErrorTypeEnum {
      *
      * @since 1.0.0
      */
-    DATA_INSERTION_FAILURE("-4", "Error al insertar registro en la base de datos.", "Revisar los datos que se están enviando a registrar.");
+    DATA_INSERTION_FAILURE("-4", "Error al insertar registro en la base de datos.", "Revisar los datos que se están enviando a registrar."),
+
+    /**
+     * Tipo de error que indica que no se tiene permisos para acceder al recurso.
+     * <p>Code: 403</p>
+     * <p>Message: Acceso no autorizado.</p>
+     * <p>Recommendation: Revisar o solicitar los permisos para acceder.</p>
+     *
+     * @since 1.0.0
+     */
+    UNAUTHORIZED_ACCESS("403", "Acceso no autorizado.", "Revisar o solicitar los permisos para acceder."),
+
+    /**
+     * Tipo de error que indica que las credenciales o token es incorrecto.
+     * <p>Code: 401</p>
+     * <p>Message: Credenciales o token incorrectos.</p>
+     * <p>Recommendation: Revisar las credenciales o token.</p>
+     *
+     * @since 1.0.0
+     */
+    INCORRECT_AUTHENTICATION("401", "Credenciales o token incorrectos.", "Revisar las credenciales o token.");
 
     private final String code;
     private final String message;

@@ -22,10 +22,10 @@ public class ErrorResponseDto {
     @Schema(description = "Mensaje de error", example = "Error interno del servidor")
     private String message;
 
-    @Schema(description = "Detalles adicionales sobre el error", example = "Se ha producido un error en la base de datos")
+    @Schema(description = "Detalles adicionales sobre el error", example = "Se ha producido un error en el proceso...")
     private String details;
 
-    @Schema(description = "Recomendaciones para solucionar el error", example = "Verificar la conexión a la base de datos")
+    @Schema(description = "Recomendaciones para solucionar el error", example = "Verificar las respectivas...")
     private String recommendation;
 
     /**

@@ -84,11 +84,15 @@ La estructura de este proyecto Maven se organiza de la siguiente manera:
 
 - **Spring Boot**: Facilita la configuración y el desarrollo de aplicaciones Java basadas en Spring.
 - **Spring Data JPA**: Proporciona una interfaz para acceder a la base de datos utilizando JPA.
-- **Spring Security**: Próximamente.
+- **Spring Security**: Proporciona autenticación, autorización y protección contra vulnerabilidades de seguridad comunes en aplicaciones.
 
 ## Consideraciones de Seguridad
 
-Próximamente.
+- **Uso de JWT (JSON Web Tokens)**: Se implementó un sistema de autenticación basado en JWT para validar y proteger las solicitudes.
+- **Protección de Contraseñas**: Las contraseñas de los usuarios se almacenarán en la base de datos utilizando codificación segura, como BCrypt, para evitar vulnerabilidades relacionadas con fugas de información.
+- **Roles y Permisos**: Se configuran roles específicos (como ADMIN y USER) y asociarlos a endpoints relevantes para restringir el acceso a funcionalidades sensibles.
+- **Manejo Centralizado de Errores**: Se utiliza un controlador global de excepciones (`GlobalExceptionHandler`) para garantizar respuestas consistentes y proteger información sensible en caso de errores.
+- **Buenas Prácticas de Swagger**: Se restringe el acceso a la documentación de Swagger en entornos de producción o protegerla con autenticación.
 
 ## Despliegue y Entorno
 

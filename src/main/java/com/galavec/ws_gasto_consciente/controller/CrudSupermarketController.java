@@ -13,16 +13,19 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -62,6 +65,7 @@ public class CrudSupermarketController {
      * <p>Esta función recibe un objeto {@code SupermarketDto} válido en el cuerpo de la solicitud,
      * registra el inicio del proceso y devuelve una respuesta HTTP con un mensaje de éxito y el estado {@code CREATED}.</p>
      *
+     * @param authorization  El token de autorización en el encabezado de la solicitud.
      * @param supermarketDto el objeto {@code SupermarketDto} que contiene los datos del nuevo supermercado.
      * @return una respuesta HTTP con un mensaje sobre el resultado de la solicitud y el estado {@code CREATED}.
      * @author Héctor Galavec
@@ -69,7 +73,8 @@ public class CrudSupermarketController {
      */
     @Operation(
             summary = "Crear un nuevo supermercado",
-            description = "Maneja las solicitudes POST para crear un nuevo supermercado."
+            description = "Maneja las solicitudes POST para crear un nuevo supermercado.",
+            security = @SecurityRequirement(name = "bearerAuth")
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Supermercado creado exitosamente", content = @Content(
@@ -89,8 +94,9 @@ public class CrudSupermarketController {
                     schema = @Schema(implementation = SupermarketDto.class)
             )
     )
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/new-supermarket")
-    public ResponseEntity<ResponseDto> newSupermarket(@RequestBody @Valid SupermarketDto supermarketDto) {
+    public ResponseEntity<ResponseDto> newSupermarket(@RequestHeader("Authorization") String authorization, @RequestBody @Valid SupermarketDto supermarketDto) {
         log.info("****** Proceso newSupermarket: {} ******", supermarketDto.getSupermarketName());
 
         ResponseDto responseDto;
@@ -119,19 +125,22 @@ public class CrudSupermarketController {
     /**
      * Maneja las solicitudes GET para obtener el listado de todos los supermercados registrados.
      *
+     * @param authorization El token de autorización en el encabezado de la solicitud.
      * @return una respuesta HTTP con el listado de los supermercados que se encuentran registrados y, el estado {@code OK}.
      * @author Héctor Galavec
      * @since 1.0.0
      */
     @Operation(
             summary = "Obtiene el listado de todos los supermercados registrados",
-            description = "Maneja las solicitudes GET para obtener el listado de todos los supermercados registrados."
+            description = "Maneja las solicitudes GET para obtener el listado de todos los supermercados registrados.",
+            security = @SecurityRequirement(name = "bearerAuth")
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Consulta realizada exitosamente")
     })
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/get-all-supermarkets")
-    public ResponseEntity<List<SupermarketEntity>> getAllSupermarkets() {
+    public ResponseEntity<List<SupermarketEntity>> getAllSupermarkets(@RequestHeader("Authorization") String authorization) {
         log.info("****** Proceso getAllSupermarkets ******");
 
         return new ResponseEntity<>(supermarketService.getAllSupermarkets(), HttpStatus.OK);

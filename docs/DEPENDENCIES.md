@@ -11,6 +11,13 @@
 - [spring-boot-starter-validation](#spring-boot-starter-validation).
 - [jackson-datatype-jsr310](#jackson-datatype-jsr310).
 - [springdoc-openapi-starter-webmvc-ui](#springdoc-openapi-starter-webmvc-ui).
+- [spring-boot-starter-security](#spring-boot-starter-security).
+- [spring-security-core](#spring-security-core).
+- [spring-security-config](#spring-security-config).
+- [spring-security-web](#spring-security-web).
+- [jjwt-api](#jjwt-api).
+- [jjwt-impl](#jjwt-impl).
+- [jjwt-jackson](#jjwt-jackson).
 
 ## spring-boot-starter-web
 
@@ -99,3 +106,59 @@
 - **Versión**: 2.6.0
 - **Propósito**: En Maven se utiliza para integrar y automatizar la generación de documentación de APIs RESTful en aplicaciones Spring Boot, utilizando la especificación OpenAPI.
 - **Configuración Especial**: No requiere configuración especial.
+
+## spring-boot-starter-security
+
+- **Grupo**: org.springframework.boot
+- **Artefacto**: spring-boot-starter-security
+- **Versión**: 3.4.1
+- **Propósito**: Proporciona una integración rápida y sencilla con Spring Security, permitiendo implementar autenticación, autorización y protección contra vulnerabilidades comunes como CSRF en aplicaciones Spring Boot.
+- **Configuración Especial**: Requiere definir un SecurityFilterChain para personalizar las reglas de seguridad. Si se utiliza autenticación basada en JWT, es necesario deshabilitar CSRF y agregar un filtro personalizado para validar los tokens.
+
+## spring-security-core
+
+- **Grupo**: org.springframework.security
+- **Artefacto**: spring-security-core
+- **Versión**: 6.4.2
+- **Propósito**: Proporciona las clases y funcionalidades esenciales para manejar autenticación, autorización y seguridad en aplicaciones Java, como `AuthenticationManager`, `UserDetailsService` y `PasswordEncoder`.
+- **Configuración Especial**: Requiere ser complementada con otras dependencias como `spring-security-config` para personalizar la configuración de seguridad.
+
+## spring-security-config
+
+- **Grupo**: org.springframework.security
+- **Artefacto**: spring-security-config
+- **Versión**: 6.4.2
+- **Propósito**: Permite personalizar aspectos como reglas de autorización, métodos de autenticación y el manejo de usuarios mediante clases como `SecurityConfigurer` y `HttpSecurity`.
+- **Configuración Especial**: Requiere crear un `SecurityFilterChain` para definir las políticas de seguridad específicas. Se utiliza en combinación con `spring-security-core` para establecer estrategias avanzadas de autenticación y autorización.
+
+## spring-security-web
+
+- **Grupo**: org.springframework.security
+- **Artefacto**: spring-security-web
+- **Versión**: 6.4.2
+- **Propósito**: Maneja filtros de seguridad, intercepta solicitudes HTTP y aplica reglas de autenticación y autorización en el contexto de una aplicación web. Es fundamental para configurar reglas de autorización por URL, excepciones de seguridad y políticas de acceso.
+- **Configuración Especial**: Requiere definir un filtro de seguridad, como `SecurityFilterChain`, para gestionar solicitudes HTTP.
+
+## jjwt-api
+
+- **Grupo**: io.jsonwebtoken
+- **Artefacto**: jjwt-api
+- **Versión**: 0.12.6
+- **Propósito**: Facilita la creación, firma y validación de JSON Web Tokens (JWT) en aplicaciones Java. Es compatible con estándares como JWS (JSON Web Signature) y JWE (JSON Web Encryption).
+- **Configuración Especial**: Requiere configurar una clave secreta o un par de claves públicas/privadas para firmar y verificar los tokens. Puede combinarse con otras dependencias del mismo grupo, como `jjwt-impl` y `jjwt-jackson`, para funcionalidades adicionales como serialización JSON.
+
+## jjwt-impl
+
+- **Grupo**: io.jsonwebtoken
+- **Artefacto**: jjwt-impl
+- **Versión**: 0.12.6
+- **Propósito**: Proporciona la implementación interna de las funcionalidades de JJWT, como la creación, firma y validación de JSON Web Tokens (JWT). Es un complemento necesario para que `jjwt-api` funcione correctamente.
+- **Configuración Especial**: Requiere configurar una clave secreta o un par de claves públicas/privadas para firmar y verificar los tokens. Debe usarse junto con `jjwt-api` y, opcionalmente, `jjwt-jackson` para manejar la serialización/deserialización de tokens en formato JSON.
+
+## jjwt-jackson
+
+- **Grupo**: io.jsonwebtoken
+- **Artefacto**: jjwt-jackson
+- **Versión**: 0.12.6
+- **Propósito**: Permite la integración de JJWT con Jackson para manejar la serialización y deserialización de JSON en tokens JWT. Es útil para trabajar con claims complejos en formato JSON.
+- **Configuración Especial**: Debe usarse junto con `jjwt-api` y `jjwt-impl` para una funcionalidad completa. Se debe incluir Jackson en el proyecto, ya que esta dependencia lo utiliza para procesar JSON.
